@@ -35,28 +35,78 @@ public class Card {
 	void dealOutput() {
 		
 	}
-	// 冒泡排序
-	void Bubble(int a[]) {
-		
-	}
 	// 比较函数
 	void Compare() {
 		
 	}
+	// 判断是否为同花顺
+	boolean dealTongHuaShun(int num[],String decor[]) {
+		boolean result = false;
+		if(decor[0].equals(decor[1]) && decor[1].equals(decor[2]) && decor[2].equals(decor[3]) && decor[3].equals(decor[4])) {
+			if(num[0] + 1 == num[1] && num[1] + 1 == num[2] && num[2] + 1 == num[3] && num[3] + 1 == num[4]) {
+				result = true;
+				num[5] = num[4];
+			}
+		}
+		return result;
+	}
+	// 判断是否为顺子
+	boolean dealShunZi(int num[]) {
+		boolean result = false;
+		if(num[0] + 1 == num[1] && num[1] + 1 == num[2] && num[2] + 1 == num[3] && num[3] + 1 == num[4]) {
+			result = true;
+			num[5] = num[4];
+		}
+		return result;
+	}
+	// 判断是否为三条
+	boolean dealSanTiao(int num[]) {
+		boolean result = false;
+		if(num[0] == num[1] && num[1] == num[2]) {
+			result = true;
+			num[5] = num[0];
+		}else if(num[1] == num[2] && num[2] == num[3]) {
+			result = true;
+			num[5] = num[1];
+		}else if(num[2] == num[3] && num[3] == num[4]) {
+			result = true;
+			num[5] = num[2];
+		}
+		return result;
+	}
+	// 判断是否为两对
+	boolean dealLiangDui(int num[]) {
+		boolean result = false;
+		if(num[0] == num[1] && num[2] == num[3]) {
+			result = true;
+			num[5] = num[3];
+		}else if(num[1] == num[2] && num[3] == num[4]) {
+			result = true;
+			num[5] = num[4];
+		}
+		return result;
+	}
+	// 判断是否为对子
+//	boolean dealDuiZi(int num[]) {
+//		
+//	}
 	// 调用
 	String GetValue(String black[], String white[]) {
 		String result = null;
-		int blacknum[] = new int[] {0,0,0,0,0};
-		int whitenum[] = new int[] {0,0,0,0,0};
+		int blacknum[] = new int[] {0,0,0,0,0,0};
+		int whitenum[] = new int[] {0,0,0,0,0,0};
 		String blackdecor[] = new String[] {"","","","",""};
 		String whitedecor[] = new String[] {"","","","",""};
+		boolean blackT = false;
+		boolean whiteT= false;
 		dealInput(black,blacknum,blackdecor);
 		dealInput(white,whitenum,whitedecor);
-		System.out.println(whitedecor[0]);
-		System.out.println(whitedecor[1]);
-		System.out.println(whitedecor[2]);
-		System.out.println(whitedecor[3]);
-		System.out.println(whitedecor[4]);
+		blackT = dealTongHuaShun(blacknum,blackdecor);
+		blackT = dealShunZi(blacknum);
+		blackT = dealSanTiao(blacknum);
+		blackT = dealLiangDui(blacknum);
+		System.out.println(blackT);
+		System.out.println(blacknum[5]);
 		return result;
 	}
 }
